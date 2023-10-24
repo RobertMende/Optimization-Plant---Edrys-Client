@@ -1,0 +1,31 @@
+.container {
+    text-align: center;
+    margin: 20px;
+    border: 2px solid #ccc ;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.bdy{
+    background-color: #d5ffff;
+    padding: 10px;
+}
+
+img{
+    background-color: #ffffff;
+}
+
+form {
+    background-color: azure;
+    display: inline-block;
+    text-align: center;
+    font: "arial";
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.image{
+    padding: 20px;
+}

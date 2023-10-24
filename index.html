@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+    <title>Optimization Plant</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+<meta name="description" content="Access the Optimization plant">
+<base href=".">
+
+<script
+      defer
+      src="https://edrys-org.github.io/edrys/module/vendor/alpine.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://edrys-org.github.io/edrys/module/vendor/water.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://edrys-org.github.io/edrys/module/vendor/open-iconic/css/open-iconic.min.css"
+    />
+    <script src="https://edrys-org.github.io/edrys/module/edrys.js"></script>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script>
+        Edrys.onReady(()=>console.log("Edrys ready", Edrys));
+    </script>
+
+</head>
+<body>
+    <h1>Welcome to the plant</h1>
+    <script src="index.js" type="module">
+
+
+    </script>
+
+    <script>
+        Edrys.onReady(()=>{
+              if(Edrys.role==="station"){
+                const username=Edrys.username;
+                  console.log("Station script");
+                  const url="ws://localhost:8765";
+                  const ws=new WebSocket(url);
+                  Edrys.onMessage(({from, subject, body})=>{
+                    while(!(ws.readyState===ws.OPEN)){}
+                    if(from!=username) ws.send(body);
+                    });
+
+                  ws.addEventListener("open", (e)=>console.log("WS open"));
+                  ws.addEventListener("message", (e)=>{
+                    const msg=JSON.parse(e.data);
+                    if(msg.topic==="dataUpdate"||msg.topic==="stateChanged") Edrys.sendMessage(msg.topic, e.data);
+                    console.log(msg);
+                  }
+                  );
+              }})
+      </script>
+<div class="bdy">
+  
+  <div class="image">
+  <img src="images/withoutTags.jpg">
+  </div>
+  <div class="image">
+  <img src="images/withTags.jpg">
+  </div>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <button id="mvBtn" ></button>
+  </div>
+    <div class="container" >
+
+        <canvas id="c1"></canvas>
+        <form id="f1">
+          <label for="inputValue">Enter the flow rate (sccm/min)</label>
+          <input type="text" id="inputValue" name="inputValue">
+          <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="container">
+
+      <canvas id="c2" ></canvas>
+      <form id="f2">
+        <label for="inputValue">Enter the oven temperature (°C)</label>
+        <input type="text" id="inputValue" name="inputValue">
+        <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="container">
+
+    <canvas id="c3"></canvas>
+    <form id="f3">
+      <label for="inputValue">Enter the thermostat temperature (°C)</label>
+      <input type="text" id="inputValue" name="inputValue">
+      <button type="submit">Submit</button>
+  </form>
+  </div>
+  <div>
+    <canvas id="c4" class="container"></canvas>
+</div>
+<div>
+  <canvas id="c5" class="container"></canvas>
+</div>
+<div>
+  <canvas id="c6" class="container"></canvas>
+</div>
+<div>
+  <canvas id="c7" class="container"></canvas>
+</div>
+</div>
+
+
+
+
+</body>
+
