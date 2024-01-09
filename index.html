@@ -42,6 +42,7 @@
                   Edrys.onMessage(({from, subject, body})=>{
                     while(!(ws.readyState===ws.OPEN)){}
                     if(from!=username) ws.send(body);
+    
                     });
 
                   ws.addEventListener("open", (e)=>console.log("WS open"));
@@ -51,6 +52,8 @@
                     console.log(msg);
                   }
                   );
+
+                  Edrys.module.config.state="Hello World";
               }})
       </script>
 <div class="bdy">

@@ -1,7 +1,7 @@
 
 import charts from "./charts.js";
 import getOptimizationModels from "./models.js";
-import appendEventHandlers from "./requestHandlers.js";
+import appendEventHandlers, {updateInputFields}from "./requestHandlers.js";
 
 
 
@@ -17,6 +17,7 @@ Edrys.onReady(()=>{
             if(from==username) return;
             const msg=JSON.parse(body);
             if(msg.topic==="dataUpdate") onDataUpdate(msg);
+            if(msg.topic==="setValue") onValueSet(msg);
         
         }
 
@@ -29,6 +30,12 @@ Edrys.onReady(()=>{
                 return;
             }
             model.appendValues(msg.data);
+        }
+
+        const onValueSet=msg=>{
+            const topic=msg.subTopic;
+            const newValue=msg.data.newValue;
+
         }
         
         const getModel=topic=>models.filter(m=>m.topic===topic)[0];
@@ -48,7 +55,7 @@ Edrys.onReady(()=>{
         appendEventHandlers();
        
         
-        
+        setTimeout(()=>console.log("state: ", Edrys.module.config.state), 2000);
         
     }
 })

@@ -1,10 +1,11 @@
-        
+
+const f1=window.document.getElementById("f1");
+const f2=window.document.getElementById("f2");
+const f3=window.document.getElementById("f3");     
+
+
 const appendEventHandlers=()=>{        
         
-        const f1=window.document.getElementById("f1");
-        const f2=window.document.getElementById("f2");
-        const f3=window.document.getElementById("f3");
-
         const getFloat=(value)=>{
             const valueWithPoint=value.replace(',','.');
             return parseFloat(parseFloat(valueWithPoint).toFixed(1));
@@ -43,8 +44,43 @@ const appendEventHandlers=()=>{
             const info={topic: "setValue", subTopic: "Relay switch", data: {func: valveState?"turnOff":"turnOn", args: [1]}};
             Edrys.sendMessage("setValue", info);
             valveState=!valveState;
-            btn.innerHTML=valveState? "Turn off Magnetic Valve": "Turn on Magnetic Valve";
+            
         })
     }
 
+const topicForms={
+    "MFC in Flow": f1,
+    "Temperature Oven": f2,
+    "Temperature Thermostat": f3
+};
+
+const setValueOnInput=(topic, newValue)=>{
+    if(!(topic in topicForms)) return;
+
+    const form=topicForms[topic];
+    form.getElementsByTagName("input")[0].value=newValue.toFixed(1);
+}
+
+const  updateInputFields=(setValueRequest)=>{
+    const msg=JSON.parse(setValueRequestBody);
+    let topic, newValue;
+    if(msg.subTopic==="MFC in"&&msg.data.func==="SetFlowRate"){
+        topic="MFC in Flow"; newValue=msg.data.args[1];
+    }
+    else if(msg.subTopic==="Temperature Controller Oven"&&msg.data.func==="SetTemperature"){
+        topic="Temperature Oven"; newValue=msg.data.args[0];
+    }
+    else if(msg.subTopic==="Thermostat"&&msg.data.func==="SetTemperature"){
+        topic="Temperature Thermostat"; newValue=msg.data.args[0];
+    }
+
+    setValueOnInput(topic, newValue)
+}
+
+const updateButton=newState=>{
+    const btn=window.document.getElementById("mvBtn");
+    btn.innerHTML=newState? "Turn off Magnetic Valve": "Turn on Magnetic Valve";
+}
+
 export default appendEventHandlers;
+export {updateInputFields}
