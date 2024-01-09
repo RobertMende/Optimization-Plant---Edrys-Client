@@ -37,6 +37,7 @@
               if(Edrys.role==="station"){
                 const username=Edrys.username;
                   console.log("Station script");
+                  console.log("Running");
                   const url="ws://localhost:8765";
                   const ws=new WebSocket(url);
                   Edrys.onMessage(({from, subject, body})=>{
