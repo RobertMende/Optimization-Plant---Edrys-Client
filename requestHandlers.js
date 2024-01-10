@@ -37,7 +37,7 @@ const appendEventHandlers=()=>{
             Edrys.sendMessage("setValue", info);
         });
 
-        let valveState=Edrys.getItem("Relay Switch");;
+        let valveState=Edrys.getItem("relay state");;
         btn.innerHTML=valveState?"Turn On Magnetic Valve":"Turn Off Magnetic Valve";
         btn.addEventListener("click", (e)=>{
             const info={topic: "setValue", subTopic: "Relay switch", data: {func: valveState?"turnOff":"turnOn", args: [1]}};
@@ -57,7 +57,7 @@ const  updateInputFields=(subTopic, value)=>{
                 const input=form.getElementsByTagName("input")[0];
                 input.value=value.toFixed(1);
         }
-        else if(subTopic==="Relay Switch){
+        else if(subTopic==="Relay Switch"){
                 updateButton(value);
         }
         else console.log("Unknown subtopic", subTopic);
