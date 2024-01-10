@@ -1,7 +1,7 @@
 
 import charts from "./charts.js";
 import getOptimizationModels from "./models.js";
-import appendEventHandlers, {updateInputFields}from "./requestHandlers.js";
+import appendEventHandlers, {updateInputFields, setInitialData}from "./requestHandlers.js";
 
 
 
@@ -35,6 +35,8 @@ Edrys.onReady(()=>{
         const onValueSet=info=>{
             updateInputFields(info.subTopic, info.value);
         }
+
+        setInitialData();
         
         const getModel=topic=>models.filter(m=>m.topic===topic)[0];
 
