@@ -20,8 +20,8 @@ Edrys.onReady(()=>{
             if(msg.topic==="valueSet") onValueSet(msg);
         
         }
-
-         const getModel=topic=>models.filter(m=>m.topic===topic)[0];
+        const models=getOptimizationModels();
+        const getModel=topic=>models.filter(m=>m.topic===topic)[0];
 
         const onDataUpdate=(msg)=>{
             console.log("data update");
@@ -50,7 +50,7 @@ Edrys.onReady(()=>{
             return interval;
         }
 
-        const models=getOptimizationModels();
+        
         
         setChartUpdates(500);
 
