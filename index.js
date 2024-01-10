@@ -17,7 +17,7 @@ Edrys.onReady(()=>{
             if(from==username) return;
             const msg=JSON.parse(body);
             if(msg.topic==="dataUpdate") onDataUpdate(msg);
-            if(msg.topic==="setValue") onValueSet(msg);
+            if(msg.topic==="valueSet") onValueSet(msg);
         
         }
 
@@ -32,10 +32,8 @@ Edrys.onReady(()=>{
             model.appendValues(msg.data);
         }
 
-        const onValueSet=msg=>{
-            const topic=msg.subTopic;
-            const newValue=msg.data.newValue;
-
+        const onValueSet=info=>{
+            updateInputFields(info.subTopic, info.value);
         }
         
         const getModel=topic=>models.filter(m=>m.topic===topic)[0];
@@ -50,7 +48,7 @@ Edrys.onReady(()=>{
 
         const models=getOptimizationModels();
         
-        setChartUpdates(1000);
+        setChartUpdates(500);
 
         appendEventHandlers();
        
