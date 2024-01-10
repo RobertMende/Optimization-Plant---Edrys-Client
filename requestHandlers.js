@@ -76,7 +76,7 @@ const setInitialData=()=>{
         }
 
         setFormValue("MFC in", Edrys.getItem("air flow"));
-        setFormValue("Temperature Oven", Edrys.getItem("temperature Oven"));
+        setFormValue("Temperature Oven", Edrys.getItem("temperature oven"));
         setFormValue("Thermostat", Edrys.getItem("temperature thermostat"));
         updateButton(Edrys.getItem("relay state"));
 }
