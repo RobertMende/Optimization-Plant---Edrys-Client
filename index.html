@@ -89,7 +89,7 @@
                     }
                 }
 
-                const propagateUpdates(subTopic, func, args){
+                const propagateUpdates=(subTopic, func, args=>
                     Edrys.sendMessage("valueSet", {subTopic:subTopic, value:Edrys.getItem(subTopic)});
                 }
               }})
