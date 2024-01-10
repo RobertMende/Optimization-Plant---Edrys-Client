@@ -43,6 +43,7 @@
                   Edrys.onMessage(({from, subject, body})=>{
                     while(!(ws.readyState===ws.OPEN)){}
                     if(from!=username) ws.send(body);
+                    checkIfValueSet(subject, body);
     
                     });
 
@@ -54,8 +55,34 @@
                   }
                   );
 
-                  Edrys.module.config.state="Hello World";
-                  console.log("state:", Edrys.module.config.state);
+                  const checkIfValueSet=(subject, body)=>{
+                      if(!(subject==="setValue")) return;
+
+                      const msg=JSON.parse(body);
+                      onValueSet(msg);
+                  }
+
+                  const onValueSet=msg=>{
+                    const subTopic=msg.subTopic;
+                    const func=msg.data.func;
+                    const args=msg.data.args;
+                    updateState(subTopic, func, args);
+                    propagateUpdates(subTopic, func, args);
+                }
+        
+                const updateState=(subTopic, func, args)=>{
+                    if(subTopic==="MFC in") Edrys.setItem("air flow", args[1])
+                    else if(subTopic==="Temperature Controller Oven") Edrys.setItem("temperature oven", args[0])
+                    else if(subTopic==="Thermostat") Edrys.setItem("temperature thermostat", args[0])
+                    else if(subTopic==="Relay Switch"){
+                    if(func==="turnOff") Edrys.setItem("relay state", false)
+                    else Edrys.setItem("relay state", true)
+                    }
+                }
+
+                const propagateUpdates(subTopic, func, args){
+                    Edrys.sendMessage("valueSet", {subTopic:subTopic, value:Edrys.getItem(subTopic)});
+                }
               }})
       </script>
 <div class="bdy">
