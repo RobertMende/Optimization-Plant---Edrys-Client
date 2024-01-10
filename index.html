@@ -55,6 +55,15 @@
                   }
                   );
 
+                  const setInitialData=()=>{
+                      Edrys.setItem("flow rate", 0);
+                      Edrys.setItem("temperature oven", 0);
+                      Edrys.setItem("temperature thermostat", 20);
+                      Edrys.setItem("relay state", false);
+                  }
+
+                  setInitialData();
+
                   const checkIfValueSet=(subject, body)=>{
                       if(!(subject==="setValue")) return;
 
