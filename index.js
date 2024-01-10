@@ -21,6 +21,8 @@ Edrys.onReady(()=>{
         
         }
 
+         const getModel=topic=>models.filter(m=>m.topic===topic)[0];
+
         const onDataUpdate=(msg)=>{
             console.log("data update");
             const modelTopic=msg.subTopic;
@@ -38,7 +40,7 @@ Edrys.onReady(()=>{
 
         setInitialData();
         
-        const getModel=topic=>models.filter(m=>m.topic===topic)[0];
+       
 
         const setChartUpdates=(intervalMS)=>{
             const interval=setInterval(()=>{
