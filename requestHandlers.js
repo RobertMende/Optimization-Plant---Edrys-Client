@@ -49,32 +49,13 @@ const appendEventHandlers=()=>{
     }
 
 const topicForms={
-    "MFC in Flow": f1,
+    "MFC in": f1,
     "Temperature Oven": f2,
     "Temperature Thermostat": f3
 };
 
-const setValueOnInput=(topic, newValue)=>{
-    if(!(topic in topicForms)) return;
-
-    const form=topicForms[topic];
-    form.getElementsByTagName("input")[0].value=newValue.toFixed(1);
-}
-
 const  updateInputFields=(setValueRequest)=>{
-    const msg=JSON.parse(setValueRequestBody);
-    let topic, newValue;
-    if(msg.subTopic==="MFC in"&&msg.data.func==="SetFlowRate"){
-        topic="MFC in Flow"; newValue=msg.data.args[1];
-    }
-    else if(msg.subTopic==="Temperature Controller Oven"&&msg.data.func==="SetTemperature"){
-        topic="Temperature Oven"; newValue=msg.data.args[0];
-    }
-    else if(msg.subTopic==="Thermostat"&&msg.data.func==="SetTemperature"){
-        topic="Temperature Thermostat"; newValue=msg.data.args[0];
-    }
 
-    setValueOnInput(topic, newValue)
 }
 
 const updateButton=newState=>{
