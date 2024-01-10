@@ -48,7 +48,7 @@ const appendEventHandlers=()=>{
 const topicForms={
     "MFC in": f1,
     "Temperature Oven": f2,
-    "Temperature Thermostat": f3
+    "Thermostat": f3
 };
 
 const  updateInputFields=(subTopic, value)=>{
@@ -75,9 +75,9 @@ const setInitialData=()=>{
         input.value=value.toFixed(1);
         }
 
-        setFormValue("MFC in", Edrys.getItem("air flow");
-        setFormValue("Temperature Oven", Edrys.getItem("temperature Oven");
-        setFormValue("Temperature Thermostat", Edrys.getItem("temperature thermostat");
+        setFormValue("MFC in", Edrys.getItem("air flow"));
+        setFormValue("Temperature Oven", Edrys.getItem("temperature Oven"));
+        setFormValue("Thermostat", Edrys.getItem("temperature thermostat"));
         updateButton(Edrys.getItem("relay state"));
 }
 
