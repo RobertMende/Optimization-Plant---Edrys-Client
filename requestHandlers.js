@@ -82,4 +82,4 @@ const setInitialData=()=>{
 }
 
 export default appendEventHandlers;
-export {updateInputFields}
+export {updateInputFields, setInitialData}
