@@ -42,7 +42,7 @@ const appendEventHandlers=()=>{
             const info={topic: "setValue", subTopic: "Relay switch", data: {func: valveState?"turnOff":"turnOn", args: [1]}};
             Edrys.sendMessage("setValue", info);
             valveState=!valveState;
-            
+            btn.innerHTML=valveState? "Turn On Magnetic Valve" : "Turn Off Magnetic Valve";
         })
     }
 
