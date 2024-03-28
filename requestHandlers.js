@@ -13,8 +13,6 @@ const appendEventHandlers=()=>{
             //mfc
             e.preventDefault();
             const input=getFloat(e.target[0].value)
-            console.log("Clicked");
-            console.log(input);
             const info={topic: "setValue", subTopic: "MFC in", data: {func: "SetFlowRate", args: [input, 1]}}
             Edrys.sendMessage("setValue", info);
         })
