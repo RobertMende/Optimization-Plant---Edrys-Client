@@ -1,6 +1,25 @@
 
 const [f1, f2, f3]=["f1", "f2", "f3"].map(el => window.document.getElementById(el));
 
+const sendMessage=(topic, info)=>{
+        let messageSent=false;
+        let counter=0;
+        const maxCounter=5;
+
+        while(!messageSent){
+        try{
+                Edrys.sendMessage("setValue", info);
+                messageSent=true;
+        }
+        catch{
+                counter++;
+                if(counter==maxCounter){
+                        console.log("Reached maximum number of tries to send message", info);
+                        break;
+        }
+        }
+        
+}
 
 const appendEventHandlers=()=>{        
         
@@ -14,7 +33,7 @@ const appendEventHandlers=()=>{
             e.preventDefault();
             const input=getFloat(e.target[0].value)
             const info={topic: "setValue", subTopic: "MFC in", data: {func: "SetFlowRate", args: [input, 1]}}
-            Edrys.sendMessage("setValue", info);
+            sendMessage("setValue", info);
         })
 
         f2.addEventListener("submit", e=>{
@@ -22,7 +41,7 @@ const appendEventHandlers=()=>{
             e.preventDefault();
             const input=getFloat(e.target[0].value)
             const info={topic: "setValue", subTopic: "Temperature Controller Oven", data: {func: "SetTemperature", args: [input]}}
-            Edrys.sendMessage("setValue", info);
+            sendMessage("setValue", info);
         })
 
         f3.addEventListener("submit", e=>{
@@ -30,7 +49,7 @@ const appendEventHandlers=()=>{
             e.preventDefault();
             const input=getFloat(e.target[0].value)
             const info={topic: "setValue", subTopic: "Thermostat", data: {func: "SetTemperature", args: [input]}}
-            Edrys.sendMessage("setValue", info);
+            sendMessage("setValue", info);
         });
 
         let valveState=false;
@@ -38,7 +57,7 @@ const appendEventHandlers=()=>{
         btn.innerHTML="Turn On Magnetic Valve";
         btn.addEventListener("click", (e)=>{
             const info={topic: "setValue", subTopic: "Relay switch", data: {func: valveState?"turnOff":"turnOn", args: [1]}};
-            Edrys.sendMessage("setValue", info);
+            sendMessage("setValue", info);
             valveState=!valveState;
             btn.innerHTML=valveState? "Turn Off Magnetic Valve" : "Turn On Magnetic Valve";
         })
