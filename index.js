@@ -1,7 +1,7 @@
 
 import charts from "./charts.js";
 import getOptimizationModels from "./models.js";
-import appendEventHandlers, {updateInputFields}from "./requestHandlers.js";
+import appendEventHandlers from "./requestHandlers.js";
 
 
 
