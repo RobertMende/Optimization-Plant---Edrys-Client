@@ -98,4 +98,4 @@ const updateButton=newState=>{
 }
 
 export default appendEventHandlers;
-export {updateInputFields}
+
