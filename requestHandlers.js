@@ -20,6 +20,7 @@ const sendMessage=(topic, info)=>{
         }
         
 }
+}
 
 const appendEventHandlers=()=>{        
         
