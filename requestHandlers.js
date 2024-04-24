@@ -1,4 +1,4 @@
-
+r
 const [f1, f2, f3]=["f1", "f2", "f3"].map(el => window.document.getElementById(el));
 
 const sendMessage=(topic, info)=>{
@@ -14,7 +14,7 @@ const sendMessage=(topic, info)=>{
         catch{
                 counter++;
                 if(counter==maxCounter){
-                        console.log("Reached maximum number of tries to send message", info);
+                        console.error("Reached maximum number of tries to send message", info);
                         break;
         }
         }
@@ -57,10 +57,11 @@ const appendEventHandlers=()=>{
         const btn=window.document.getElementById("mvBtn");
         btn.innerHTML="Turn On Magnetic Valve";
         btn.addEventListener("click", (e)=>{
+            console.log("Switchung magnetic valve");
             const info={topic: "setValue", subTopic: "Relay switch", data: {func: valveState?"turnOff":"turnOn", args: [1]}};
             sendMessage("setValue", info);
             valveState=!valveState;
-            btn.innerHTML=valveState? "Turn Off Magnetic Valve" : "Turn On Magnetic Valve";
+            updateButton(valveState);
         })
     }
 
