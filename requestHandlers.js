@@ -1,4 +1,3 @@
-r
 const [f1, f2, f3]=["f1", "f2", "f3"].map(el => window.document.getElementById(el));
 
 const sendMessage=(topic, info)=>{
